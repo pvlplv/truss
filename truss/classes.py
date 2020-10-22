@@ -12,9 +12,17 @@ class Node:
 
 
 @dataclass
+class ElementProperties:
+    young_modulus: float
+    poisso_ratio: float
+    area: float
+
+
+@dataclass
 class Element:
     label: Optional[str]
     nodes: List[Node]
+    properties: ElementProperties
 
 
 @dataclass
@@ -22,13 +30,20 @@ class Problem:
     elements: List[Element]
 
     @classmethod
-    def define_problem(cls, nl_path: Path, el_path: Path):
+    def define_problem(
+        cls,
+        nl_path: Path,
+        el_path: Path,
+        properties: ElementProperties,
+    ):
         """
-        Метод задает задачу с элементами и узлами
+        Метод задает задачу с узлами и элементами
+        с предоставленными свойствами
         из листингов узлов и элементов.
 
         nl_path - путь к листингу узлов
         el_path - путь к листингу элементов
+        properties - свойства элемента
 
         Листинг узлов должен быть текстовым файлом,
         где на одной строчке расположены, разделенные пробелом,
@@ -72,6 +87,7 @@ class Problem:
                         for node in nodes
                         if node.label in [node_label for node_label in line[0:]]
                     ],
+                    properties=properties,
                 )
                 for line in el_data
             ]
