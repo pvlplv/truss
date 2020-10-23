@@ -5,8 +5,8 @@ from truss.truss import ElementProperties, Truss
 
 def test_elements():
     properties = ElementProperties(
-        young_modulus=2e11,
-        poisso_ratio=0.25,
+        young=2e11,
+        poisson=0.25,
         area=0.1,
     )
     problem = Truss(
