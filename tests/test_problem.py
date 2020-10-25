@@ -8,8 +8,8 @@ from truss.truss import ElementProperties, Truss
 
 def test_problem_init():
     properties = ElementProperties(
-        young=2e11,
-        poisson=0.25,
+        youngs_modulus=2e11,
+        poissons_ratio=0.25,
         area=0.1,
     )
 
@@ -34,13 +34,13 @@ def test_problem_init():
     assert elements[5].label == "5"
     assert elements[6].label == "6"
 
-    assert elements[0].node_labels == ("0", "1")
-    assert elements[1].node_labels == ("1", "2")
-    assert elements[2].node_labels == ("0", "2")
-    assert elements[3].node_labels == ("2", "3")
-    assert elements[4].node_labels == ("3", "4")
-    assert elements[5].node_labels == ("2", "4")
-    assert elements[6].node_labels == ("1", "3")
+    assert elements[0].node_labels == ["0", "1"]
+    assert elements[1].node_labels == ["1", "2"]
+    assert elements[2].node_labels == ["0", "2"]
+    assert elements[3].node_labels == ["2", "3"]
+    assert elements[4].node_labels == ["3", "4"]
+    assert elements[5].node_labels == ["2", "4"]
+    assert elements[6].node_labels == ["1", "3"]
 
     for node in nodes:
         assert node.problem == problem
@@ -66,8 +66,8 @@ def test_problem_init():
 
 def test_get_element_by_label():
     properties = ElementProperties(
-        young=2e11,
-        poisson=0.25,
+        youngs_modulus=2e11,
+        poissons_ratio=0.25,
         area=0.1,
     )
     problem = Truss(
@@ -79,13 +79,13 @@ def test_get_element_by_label():
     element = problem.get_element_by_label("0")
 
     assert element.label == "0"
-    assert element.node_labels == ("0", "1")
+    assert element.node_labels == ["0", "1"]
 
 
 def test_get_node_by_label():
     properties = ElementProperties(
-        young=2e11,
-        poisson=0.25,
+        youngs_modulus=2e11,
+        poissons_ratio=0.25,
         area=0.1,
     )
     problem = Truss(

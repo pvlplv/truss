@@ -7,8 +7,8 @@ from truss.truss import ElementProperties, Truss
 
 def test_nodes():
     properties = ElementProperties(
-        young=2e11,
-        poisson=0.25,
+        youngs_modulus=2e11,
+        poissons_ratio=0.25,
         area=0.1,
     )
     problem = Truss(
@@ -26,8 +26,8 @@ def test_nodes():
 
 def test_length():
     properties = ElementProperties(
-        young=2e11,
-        poisson=0.25,
+        youngs_modulus=2e11,
+        poissons_ratio=0.25,
         area=0.1,
     )
     problem = Truss(
@@ -43,8 +43,16 @@ def test_length():
 
 
 # def test_local_stiffness_matrix():
-#     properties = ElementProperties(young=2e11, poisson=0.25, area=0.1,)
-#     problem = Truss("./tests/test_el.txt", "./tests/test_nl.txt", properties,)
+#     properties = ElementProperties(
+#         youngs_modulus=2e11,
+#         poissons_ratio=0.25,
+#         area=0.1,
+#     )
+#     problem = Truss(
+#         "./tests/test_el.txt",
+#         "./tests/test_nl.txt",
+#         properties,
+#     )
 #     element = problem.get_element_by_label("0")
 
 #     local_stiffness_matrix = element.local_stiffness_matrix
