@@ -43,7 +43,25 @@ class Element:
                 [1, -1],
             ]
         )
-        return matrix * youngs_modulus * area / length
+        klocal = matrix * youngs_modulus * area / length
+        x2 = self.nodes[0].coordinates[1]
+        x1 = self.nodes[0].coordinates[0]
+        y2 = self.nodes[1].coordinates[1]
+        y1 = self.nodes[1].coordinates[0]
+        l12 = (x2 - x1) / length
+        m12 = (y2 - y1) / length
+        T = np.array(
+            [
+                [
+                    l12,
+                    m12,
+                    0,
+                    0,
+                ],
+                [0, 0, l12, m12],
+            ]
+        )
+        return T.transpose() @ klocal @ T
 
 
 @dataclass
